@@ -3,8 +3,23 @@
 var articleView = {};
 
 articleView.populateFilters = function() {
+  var authors = {
+    filterName: 'author'
+    ,option: []
+  };
+  var categories = {
+    filterName: 'category'
+    ,option: []
+  };
   $('article').each(function() {
     if (!$(this).hasClass('template')) {
+      //build 2 objects
+      authors.option.push($(this).find('address a').text());
+      categories.option.push($(this).attr('data-category'));
+      //use each object to populate a template and append to #filters//
+
+
+      /*
       var val = $(this).find('address a').text();
       var optionTag = `<option value="${val}">${val}</option>`;
 
@@ -17,6 +32,7 @@ articleView.populateFilters = function() {
       if ($(`#category-filter option[value="${val}"]`).length === 0) {
         $('#category-filter').append(optionTag);
       }
+      */
     }
   });
 };
