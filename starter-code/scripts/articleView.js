@@ -16,9 +16,18 @@ articleView.populateFilters = function() {
       //build 2 objects
       authors.option.push($(this).find('address a').text());
       categories.option.push($(this).attr('data-category'));
-      //use each object to populate a template and append to #filters//
+    }
+  });
+  var filters = [authors,categories]
+  filters.forEach(function(item){
+    var templateScript = $('#filterTemplate').html();
+    var template = Handlebars.compile(templateScript);
+    var compiledHtml = template(item);
+    $('#filters').append(compiledHtml);
+  })
 
-
+  console.log(authors,categories);
+        //use each object to populate a template and append to #filters/
       /*
       var val = $(this).find('address a').text();
       var optionTag = `<option value="${val}">${val}</option>`;
@@ -33,16 +42,18 @@ articleView.populateFilters = function() {
         $('#category-filter').append(optionTag);
       }
       */
-    }
-  });
+
 };
 
 articleView.handleAuthorFilter = function() {
-  $('#author-filter').on('change', function() {
+  $('#filters').on('change','select:first',function() {
+    console.log($(this).val())
     if ($(this).val()) {
+      console.log('first has a this')
       $('article').hide();
       $(`article[data-author="${$(this).val()}"]`).fadeIn();
     } else {
+      console.log('first has no this')
       $('article').fadeIn();
       $('article.template').hide();
     }
@@ -51,7 +62,8 @@ articleView.handleAuthorFilter = function() {
 };
 
 articleView.handleCategoryFilter = function() {
-  $('#category-filter').on('change', function() {
+  $('#filter').on('change','select', function() {
+    console.log('last')
     if ($(this).val()) {
       $('article').hide();
       $(`article[data-category="${$(this).val()}"]`).fadeIn();
