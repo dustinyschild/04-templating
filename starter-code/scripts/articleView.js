@@ -13,7 +13,6 @@ articleView.populateFilters = function() {
   };
   $('article').each(function() {
     if (!$(this).hasClass('template')) {
-      //build 2 objects
       authors.option.push($(this).find('address a').text());
       categories.option.push($(this).attr('data-category'));
     }
@@ -25,22 +24,6 @@ articleView.populateFilters = function() {
     var compiledHtml = template(item);
     $('#filters').append(compiledHtml);
   })
-        //use each object to populate a template and append to #filters/
-      /*
-      var val = $(this).find('address a').text();
-      var optionTag = `<option value="${val}">${val}</option>`;
-
-      if ($(`#author-filter option[value="${val}"]`).length === 0) {
-        $('#author-filter').append(optionTag);
-      }
-
-      val = $(this).attr('data-category');
-      optionTag = `<option value="${val}">${val}</option>`;
-      if ($(`#category-filter option[value="${val}"]`).length === 0) {
-        $('#category-filter').append(optionTag);
-      }
-      */
-
 };
 
 articleView.handleAuthorFilter = function() {
@@ -62,21 +45,7 @@ articleView.handleAuthorFilter = function() {
     }
   });
 };
-/*
-articleView.handleCategoryFilter = function() {
-  $('#filter').on('change','select:nth-child(2n)', function() {
-    console.log('last')
-    if ($(this).val()) {
-      $('article').hide();
-      $(`article[data-category="${$(this).val()}"]`).fadeIn();
-    } else {
-      $('article').fadeIn();
-      $('article.template').hide();
-    }
-    $('#author-filter').val('');
-  });
-};
-*/
+
 articleView.handleMainNav = function() {
   $('.main-nav').on('click', '.tab', function() {
     $('.tab-content').hide();
@@ -105,7 +74,6 @@ articleView.setTeasers = function() {
 
 $(document).ready(function() {
   articleView.populateFilters();
-//  articleView.handleCategoryFilter();
   articleView.handleAuthorFilter();
   articleView.handleMainNav();
   articleView.setTeasers();
