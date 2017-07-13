@@ -25,8 +25,6 @@ articleView.populateFilters = function() {
     var compiledHtml = template(item);
     $('#filters').append(compiledHtml);
   })
-
-  console.log(authors,categories);
         //use each object to populate a template and append to #filters/
       /*
       var val = $(this).find('address a').text();
